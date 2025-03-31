@@ -1,4 +1,3 @@
-// src/main/java/com/example/github/exception/GlobalExceptionHandler.java
 package com.example.github.exception;
 
 import org.springframework.http.HttpStatus;

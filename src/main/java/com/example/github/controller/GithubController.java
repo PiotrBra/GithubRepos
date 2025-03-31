@@ -1,9 +1,7 @@
-// src/main/java/com/example/github/controller/GitHubController.java
 package com.example.github.controller;
 
 import com.example.github.dto.RepositoryDto;
 import com.example.github.service.GithubService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

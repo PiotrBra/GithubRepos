@@ -1,9 +1,7 @@
-// src/main/java/com/example/github/client/GitHubClient.java
 package com.example.github.client;
 
 import com.example.github.exception.RateLimitExceededException;
 import com.example.github.exception.UserNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -19,7 +17,6 @@ public class GithubClient {
     private final RestTemplate restTemplate;
     private final String githubApiUrl;
 
-    @Autowired
     public GithubClient(RestTemplate restTemplate, @Value("${github.api.url}") String githubApiUrl) {
         this.restTemplate = restTemplate;
         this.githubApiUrl = githubApiUrl;
@@ -31,7 +28,6 @@ public class GithubClient {
             ResponseEntity<GitHubRepo[]> response = restTemplate.getForEntity(url, GitHubRepo[].class);
             return Arrays.asList(response.getBody());
         } catch (HttpClientErrorException.Forbidden ex) {
-            // Obsługa przekroczenia limitu zapytań
             throw new RateLimitExceededException("API rate limit exceeded. " + ex.getResponseBodyAsString());
         } catch (HttpClientErrorException.NotFound ex) {
             throw new UserNotFoundException("User not found");
@@ -52,29 +48,16 @@ public class GithubClient {
 
         public GitHubRepo() {
         }
-
         public String getName() {
             return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
         }
 
         public Owner getOwner() {
             return owner;
         }
 
-        public void setOwner(Owner owner) {
-            this.owner = owner;
-        }
-
         public boolean isFork() {
             return fork;
-        }
-
-        public void setFork(boolean fork) {
-            this.fork = fork;
         }
 
         public static class Owner {
@@ -87,9 +70,6 @@ public class GithubClient {
                 return login;
             }
 
-            public void setLogin(String login) {
-                this.login = login;
-            }
         }
     }
 
@@ -103,17 +83,8 @@ public class GithubClient {
         public String getName() {
             return name;
         }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
         public Commit getCommit() {
             return commit;
-        }
-
-        public void setCommit(Commit commit) {
-            this.commit = commit;
         }
 
         public static class Commit {
@@ -121,14 +92,10 @@ public class GithubClient {
 
             public Commit() {
             }
-
             public String getSha() {
                 return sha;
             }
 
-            public void setSha(String sha) {
-                this.sha = sha;
-            }
         }
     }
 }
