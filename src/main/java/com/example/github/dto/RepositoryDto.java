@@ -1,4 +1,3 @@
-// src/main/java/com/example/github/dto/RepositoryDto.java
 package com.example.github.dto;
 
 import java.util.List;
